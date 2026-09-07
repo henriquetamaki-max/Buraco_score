@@ -1,0 +1,585 @@
+/*
+ * Fonte única de cor. Trocar de tema = trocar o bloco de variáveis, nada mais.
+ * Default é o tema claro (regra de projeto). data-tema="escuro" no <html> inverte.
+ * Nenhum #fff ou #000 puro; ambos os temas passam AA para texto, borda e número.
+ */
+
+:root {
+  --bg: #f7f6f3;
+  --superficie: #fdfdfb;
+  --superficie-2: #eeede8;
+  --fg: #16181d;
+  --fg-suave: #565b66;
+  --borda: #dcdad4;
+  --borda-forte: #c3c0b7;
+  --acento: #1b4332;
+  --acento-fg: #f7f6f3;
+  --acento-suave: #e2ebe5;
+  /* O topo tem token próprio: no escuro, usar o acento como fundo de barra fica berrante. */
+  --topo-bg: #1b4332;
+  --topo-fg: #f7f6f3;
+  --topo-borda: rgb(255 255 255 / 22%);
+  --topo-botao: rgb(255 255 255 / 12%);
+  --positivo: #1b6b3a;
+  --negativo: #a3232b;
+  --destaque: #8a5a12;
+  --destaque-suave: #f6eddb;
+  --sombra: 0 1px 2px rgb(20 24 31 / 8%), 0 4px 14px rgb(20 24 31 / 6%);
+}
+
+:root[data-tema="escuro"] {
+  --bg: #14181f;
+  --superficie: #1c222c;
+  --superficie-2: #252d39;
+  --fg: #eceef2;
+  --fg-suave: #a3abb8;
+  --borda: #2f3846;
+  --borda-forte: #44505f;
+  --acento: #52b788;
+  --acento-fg: #0e1319;
+  --acento-suave: #1e2f28;
+  --topo-bg: #1a2b23;
+  --topo-fg: #e6f2ea;
+  --topo-borda: rgb(255 255 255 / 14%);
+  --topo-botao: rgb(255 255 255 / 8%);
+  --positivo: #6cc48f;
+  --negativo: #f2807f;
+  --destaque: #e0b155;
+  --destaque-suave: #302713;
+  --sombra: 0 1px 2px rgb(0 0 0 / 40%), 0 4px 14px rgb(0 0 0 / 30%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* ---------- estrutura ---------- */
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 0 max(2rem, env(safe-area-inset-bottom));
+}
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.7rem 0.9rem;
+  padding-top: max(0.7rem, env(safe-area-inset-top));
+  background: var(--topo-bg);
+  color: var(--topo-fg);
+}
+
+.topo h1 {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.topo h1 small {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.topo button {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0;
+  border: 1px solid var(--topo-borda);
+  border-radius: 0.7rem;
+  background: var(--topo-botao);
+  color: inherit;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.topo button:active {
+  transform: scale(0.94);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 0.9rem;
+}
+
+/* ---------- blocos ---------- */
+
+.cartao {
+  padding: 0.9rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.9rem;
+  background: var(--superficie);
+  box-shadow: var(--sombra);
+}
+
+.cartao > h2 {
+  margin: 0 0 0.15rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--fg-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.ajuda {
+  margin: 0;
+  color: var(--fg-suave);
+  font-size: 0.82rem;
+}
+
+.vazio {
+  padding: 1.6rem 1rem;
+  color: var(--fg-suave);
+  text-align: center;
+}
+
+.linha {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.linha-fim {
+  justify-content: flex-end;
+}
+
+.cresce {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---------- botões ---------- */
+
+.botao {
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 0.7rem;
+  background: var(--superficie-2);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.botao:active {
+  transform: scale(0.97);
+}
+
+.botao:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.botao.principal {
+  border-color: transparent;
+  background: var(--acento);
+  color: var(--acento-fg);
+}
+
+.botao.perigo {
+  border-color: transparent;
+  background: var(--negativo);
+  color: #fdfdfb;
+}
+
+.botao.largo {
+  width: 100%;
+}
+
+.botao.pequeno {
+  padding: 0.4rem 0.65rem;
+  font-size: 0.85rem;
+}
+
+/* ---------- campos ---------- */
+
+label.campo {
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+label.campo > span {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--fg-suave);
+}
+
+label.campo input,
+label.campo select {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 0.6rem;
+  background: var(--bg);
+}
+
+/* ---------- placar / folha de papel ---------- */
+
+.rolagem {
+  overflow-x: auto;
+  margin: 0 -0.9rem;
+  padding: 0 0.9rem;
+}
+
+table.placar {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+table.placar th,
+table.placar td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid var(--borda);
+  text-align: right;
+  white-space: nowrap;
+}
+
+table.placar th:first-child,
+table.placar td:first-child {
+  text-align: left;
+  color: var(--fg-suave);
+  font-weight: 600;
+}
+
+table.placar thead th {
+  font-size: 0.78rem;
+  color: var(--fg-suave);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+table.placar tbody tr.clicavel {
+  cursor: pointer;
+}
+
+table.placar tbody tr.clicavel:active {
+  background: var(--acento-suave);
+}
+
+table.placar tfoot td {
+  padding-top: 0.7rem;
+  border-bottom: none;
+  border-top: 2px solid var(--borda-forte);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+table.placar tfoot td:first-child {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pos {
+  color: var(--positivo);
+}
+
+.neg {
+  color: var(--negativo);
+}
+
+/* ---------- classificação ---------- */
+
+.classificacao {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.classificacao .item {
+  display: grid;
+  grid-template-columns: 1.6rem 1fr auto auto;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--borda);
+  border-radius: 0.7rem;
+  background: var(--bg);
+}
+
+.classificacao .item.lider {
+  border-color: var(--destaque);
+  background: var(--destaque-suave);
+}
+
+.classificacao .posicao {
+  color: var(--fg-suave);
+  font-weight: 700;
+  text-align: center;
+}
+
+.classificacao .nome {
+  min-width: 0;
+  font-weight: 650;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.classificacao .nome small {
+  display: block;
+  color: var(--fg-suave);
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.metrica {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+}
+
+.metrica b {
+  display: block;
+  font-size: 1.1rem;
+}
+
+.metrica small {
+  color: var(--fg-suave);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- entrada da rodada ---------- */
+
+.equipe-bloco {
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--borda);
+}
+
+.equipe-bloco:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.equipe-topo {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+}
+
+.equipe-topo strong {
+  font-size: 1.05rem;
+}
+
+.equipe-topo .total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.grade-ranks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(3.1rem, 1fr));
+  gap: 0.45rem;
+}
+
+.rank {
+  position: relative;
+}
+
+.rank > button.add {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 3rem;
+  padding: 0;
+  border: 1px solid var(--borda-forte);
+  border-radius: 0.55rem;
+  background: var(--bg);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rank.ativo > button.add {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+}
+
+.rank > button.add:active {
+  transform: scale(0.94);
+}
+
+.rank .qtd {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.4rem;
+  display: grid;
+  place-items: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.25rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--negativo);
+  color: #fdfdfb;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.resumo-contagem {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.55rem;
+  font-size: 0.85rem;
+}
+
+.resumo-contagem b {
+  font-variant-numeric: tabular-nums;
+}
+
+.passo {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+
+.passo .rotulo small {
+  display: block;
+  color: var(--fg-suave);
+  font-size: 0.75rem;
+}
+
+.passo .controles {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.passo .controles button {
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 1px solid var(--borda-forte);
+  border-radius: 0.55rem;
+  background: var(--bg);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.passo .controles output {
+  min-width: 1.6rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.interruptor {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.interruptor input {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex: none;
+  accent-color: var(--acento);
+}
+
+.interruptor .rotulo small {
+  display: block;
+  color: var(--fg-suave);
+  font-size: 0.75rem;
+}
+
+/* ---------- avisos ---------- */
+
+.faixa {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--destaque);
+  border-radius: 0.8rem;
+  background: var(--destaque-suave);
+  font-weight: 600;
+}
+
+.faixa.campea {
+  border-color: var(--acento);
+  background: var(--acento-suave);
+}
+
+.abas {
+  display: flex;
+  gap: 0.3rem;
+  padding: 0.2rem;
+  border-radius: 0.6rem;
+  background: var(--superficie-2);
+}
+
+.abas button {
+  flex: 1;
+  padding: 0.4rem 0.5rem;
+  border: none;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: var(--fg-suave);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.abas button[aria-pressed="true"] {
+  background: var(--superficie);
+  color: var(--fg);
+  box-shadow: var(--sombra);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .botao:active,
+  .topo button:active,
+  .rank > button.add:active {
+    transform: none;
+  }
+}

@@ -1,0 +1,1 @@
+gostaria de um site que via camera do celular sem tirar fotos ele calcula os pontos dos jogos cacheta e buraco. calculando em cada equipe os pontos automaticamente, mostradno de forma simples e diverdida o resultado e conta para validacao dos jogadores.

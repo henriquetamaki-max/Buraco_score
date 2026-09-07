@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+.venv/
+Env/
+ENV/
+env/
+*.local
+.DS_Store
+.vercel
+.vitest/
+.playwright-mcp/
