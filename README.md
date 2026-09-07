@@ -4,6 +4,8 @@ Contador de pontos de **buraco / canastra** para jogar na mesa. Abre no navegado
 tela de início e funciona sem internet. Sem conta, sem cadastro, sem anúncio, sem servidor — o placar
 fica guardado no seu próprio aparelho.
 
+**Use agora, direto do celular: [buracoscore.vercel.app](https://buracoscore.vercel.app/)**
+
 | Placar da partida | Classificação da noite |
 |---|---|
 | ![Placar da partida](docs/placar.png) | ![Classificação da noite](docs/classificacao.png) |
@@ -23,13 +25,17 @@ arruma, e todo o placar abaixo se refaz sozinho. Não precisa recomeçar nem ref
 
 ### 1. Instalar no celular
 
-Abra o endereço do app no navegador do celular. No menu do navegador, escolha **Adicionar à tela de
-início** (Android) ou **Adicionar à Tela de Início** (iPhone, pelo botão de compartilhar).
+Abra no navegador do celular:
 
-Pronto — vira um ícone como o de qualquer aplicativo, e a partir daí abre offline.
+```
+https://buracoscore.vercel.app/
+```
 
-> O endereço público ainda não foi definido. Enquanto isso, dá para rodar no seu computador seguindo a
-> seção [Para desenvolvedores](#para-desenvolvedores).
+No menu do navegador, escolha **Adicionar à tela de início** (Android, no menu de três pontos) ou
+**Adicionar à Tela de Início** (iPhone, pelo botão de compartilhar do Safari).
+
+Pronto — vira um ícone verde com uma carta, igual a qualquer aplicativo, e a partir daí abre offline.
+Para conferir que o offline pegou: ative o modo avião e abra pelo ícone; ele tem que abrir normal.
 
 ### 2. Começar
 

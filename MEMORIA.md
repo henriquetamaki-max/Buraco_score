@@ -13,6 +13,12 @@ A câmera é acelerador de digitação, nunca fonte da verdade — ver `DECISOES
 
 Hospedagem: Vercel conta free (Hobby) — 100% estático, zero backend, zero custo.
 
+No ar em:
+
+```
+https://buracoscore.vercel.app/
+```
+
 Repositório (público, por causa da licença AGPL-3.0 do modelo de visão do F2):
 
 ```
@@ -32,7 +38,11 @@ entre recargas. Conferência aritmética contra cálculo manual: Nós +360, Eles
 Telas: Início (noites salvas) · Nova noite · Torneio (classificação) · Partida (folha de papel) ·
 Rodada (entrada por toque).
 
-Próximo passo: **deploy no Vercel** (ação humana) e depois **F2** — câmera assistida.
+Deploy feito e validado no domínio real em 2026-09-07: caminho completo (partida rápida → rodada →
+placar) com aritmética conferida, manifesto e ícones respondendo, service worker registrado.
+
+Próximo passo: **usar numa noite de jogo real** — é o dado que decide o escopo do **F2** (câmera
+assistida). O campo mais chato de preencher na mesa é o que a câmera deve atacar primeiro.
 
 ## Arquitetura
 - **Vite + React + TS**, SPA estático → Vercel Hobby. Sem serverless function.
