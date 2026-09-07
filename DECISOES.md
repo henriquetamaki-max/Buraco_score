@@ -1,5 +1,49 @@
 # Decisões — Contador de Pontos (Cacheta + Buraco)
 
+## 2026-09-07 — F2 lê os jogos baixados; a mão e a batida ficam manuais
+**Contexto:** o usuário fechou o escopo da câmera — "quero que a câmera leia as sequências e batida, não
+precisa ler a mão".
+**Decisão:** a câmera lê **os jogos baixados de uma dupla** e preenche exatamente dois campos do
+formulário que já existe: `baixadas` e `canastras`. Cartas na mão, "pegou o morto" e "bateu" seguem
+manuais.
+**Sobre a batida:** a câmera não consegue vê-la. Bater é ficar sem cartas na mão; olhando para os jogos
+na mesa não existe sinal visual do evento. Continua sendo um toque no interruptor — que já custa um
+toque, então não há o que otimizar.
+**Consequências:** o F2 encolheu. Sai o caso mais difícil (cartas na mão são privadas, mal iluminadas e
+seguradas em leque) e o app precisa de um só modo de câmera. E o encaixe com o motor é direto: a saída de
+`lerMesa` é um `Contagem` e um `Canastras`, que são os tipos que o `LadoBuraco` já espera — sem conversão
+e sem tipo novo.
+
+## 2026-09-07 — Agrupar jogos pela posição na imagem, não pelo naipe
+**Contexto:** "ler sequências" parecia exigir o naipe, já que sequência no buraco é do mesmo naipe — o
+que derrubaria a decisão de usar um modelo de 14 classes.
+**Decisão:** agrupar por **proximidade das caixas na imagem** (ligação simples, corte em 1,6 × a largura
+mediana da carta detectada). O naipe continua fora do modelo.
+**Justificativa:** os jogos ficam fisicamente separados na mesa, e as cartas de um mesmo jogo ficam em
+escada sobrepostas. A distância entre cartas vizinhas do mesmo jogo é uma fração da largura da carta;
+entre jogos diferentes há vão visível. Além disso, a validade da sequência já foi conferida pelos
+jogadores quando baixaram — a câmera não precisa reprovar jogada, precisa contar ponto. E ponto depende
+só do valor da carta e de haver curinga.
+**Alternativas consideradas:** modelo de 52 classes com naipe — descartado: 4x mais classes, modelo maior
+e menos preciso, para uma informação que não entra em nenhuma conta.
+**Consequências:** usar a **mediana** da largura como escala faz o corte acompanhar a distância da câmera
+à mesa sozinho, sem calibração. Se algum dia os jogos forem baixados encostados uns nos outros, o
+agrupamento erra — e é por isso que a tela de conferência mostra os jogos separados, para o jogador ver
+o agrupamento antes de confirmar.
+
+## 2026-09-07 — O `2` ambíguo é sinalizado, nunca adivinhado
+**Contexto:** um `2` detectado num jogo pode ser curinga ou carta natural da sequência. A diferença vale
+100 pontos: canastra limpa 200 contra suja 100.
+**Decisão:** quando houver um `A` ou um `3` no mesmo jogo — as posições onde o 2 se encaixaria
+naturalmente — o `2` é marcado como **ambíguo** e o jogo vai com `precisaConferir: true`. Sem `A` nem `3`
+por perto, o 2 só pode ser curinga, e aí é contado como tal.
+**Alternativas consideradas:** (a) chutar sempre curinga — erra a favor de quem não fez canastra limpa;
+(b) chutar sempre natural — infla o placar; (c) tentar decidir pela posição do 2 dentro da escada —
+depende da ordem em que baixaram, que não é confiável.
+**Consequências:** o app propõe limpa (o caso mais comum) mas destaca o jogo na tela de conferência. É a
+aplicação concreta da regra de que a câmera propõe e o jogador decide: onde a visão não pode saber, ela
+diz que não sabe em vez de inventar um número.
+
 ## 2026-09-07 — F1 antes da câmera, e repositório público aceito
 **Contexto:** com o F0 pronto e testado, restava decidir a próxima frente: a UI por toque ou a visão
 computacional. E, para a visão, se o repositório podia ser público (os modelos YOLO prontos são AGPL-3.0,
