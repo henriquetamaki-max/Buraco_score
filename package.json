@@ -1,7 +1,7 @@
 {
   "name": "placar-baralho",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "description": "Placar de Cacheta e Buraco: torneio -> partida -> rodada, tudo derivado.",
   "scripts": {

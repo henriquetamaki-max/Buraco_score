@@ -20,7 +20,7 @@ https://github.com/henriquetamaki-max/Buraco_score
 ```
 
 ## Estado atual
-**2026-09-07 — F0 e F1 concluídos.** Motor puro (46 testes verdes, `tsc --noEmit` limpo) mais o app
+**2026-09-07 — v1.0.0 marcada. F0 e F1 concluídos.** Motor puro (46 testes verdes, `tsc --noEmit` limpo) mais o app
 jogável por toque. Build de produção: **66,4 KB gzip** de JS, 2,20 KB de CSS, service worker com 9
 entradas de precache.
 
@@ -177,6 +177,7 @@ As regras ficam registradas aqui para o caso de voltar:
 - Vencedor = o último com vidas.
 
 ## Histórico de tarefas concluídas
+- 2026-09-07 — **v1.0.0** — primeira versão utilizável: motor + app por toque, testado ponta a ponta.
 - 2026-09-07 — Repositório publicado no GitHub, commit inicial `80756c0` (42 arquivos).
 - 2026-09-07 — **F1**: 5 telas, teclado de cartas, temas claro/escuro, PWA, persistência em
   `localStorage`, gerador de ícones sem dependência. Validado ponta a ponta no navegador.
